@@ -11,5 +11,6 @@ public class SystemUserDTO {
     private String systemUserId;
     private String userName;
     private String systemUserEmail;
+    private String password;
 
 }
