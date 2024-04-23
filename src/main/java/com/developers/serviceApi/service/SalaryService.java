@@ -8,7 +8,7 @@ import com.developers.serviceApi.dto.responseDTO.ResponseSalaryDTO;
 import java.util.List;
 
 public interface SalaryService {
-    CommonResponseDTO create(RequestSalaryDTO dto, String employeeId);
+    CommonResponseDTO create(RequestSalaryDTO dto, String userTypeId);
 
     List<ResponseSalaryDTO> getAll(String searchText);
 }

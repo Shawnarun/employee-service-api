@@ -26,12 +26,12 @@ public class SalaryController {
         this.salaryService = salaryService;
     }
 
-    @PostMapping(path = {"/create"} ,params = {"employeeId"})
+    @PostMapping(path = {"/create"} ,params = {"userTypeId"})
     public ResponseEntity<StandardResponse> create(
             @Valid @RequestBody RequestSalaryDTO dto,
-            @RequestParam String employeeId) throws SQLException {
+            @RequestParam String userTypeId) throws SQLException {
         LOGGER.info("Resource creation request received");
-        CommonResponseDTO responseData = salaryService.create(dto,employeeId);
+        CommonResponseDTO responseData = salaryService.create(dto,userTypeId);
         return new ResponseEntity<>(
                 new StandardResponse(
                         responseData.getCode(), responseData.getMessage(), responseData.getData()

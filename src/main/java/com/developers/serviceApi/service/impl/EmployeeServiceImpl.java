@@ -135,7 +135,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 throw new RuntimeException("Filter Not Valid");
         }
 
-        // Apply additional filters if branchId or userTypeId is provided
+
 
         if (filterByBranch || filterByUserType) {
             List<Employee> filteredList = new ArrayList<>();

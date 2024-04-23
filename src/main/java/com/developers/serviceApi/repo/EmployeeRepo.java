@@ -38,4 +38,7 @@ public interface EmployeeRepo extends JpaRepository<Employee,String> {
 
     @Query(value = "SELECT * FROM employee WHERE active_state=0 AND employment_state=0", nativeQuery = true)
     List<Employee> findDisabledTerminated();
+
+    @Query(value = "SELECT * FROM employee WHERE user_type_id=?1", nativeQuery = true)
+    List<Employee> findByUserTypeId(String userTypeId);
 }
