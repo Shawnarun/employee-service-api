@@ -7,6 +7,7 @@ import com.developers.serviceApi.dto.responseDTO.ResponseSalaryDTO;
 import com.developers.serviceApi.entity.Employee;
 import com.developers.serviceApi.entity.Salary;
 import com.developers.serviceApi.entity.UserType;
+import com.developers.serviceApi.exception.EntryDuplicateException;
 import com.developers.serviceApi.exception.EntryNotFoundException;
 import com.developers.serviceApi.repo.EmployeeRepo;
 import com.developers.serviceApi.repo.SalaryRepo;
@@ -41,10 +42,17 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public CommonResponseDTO create(RequestSalaryDTO dto, String userTypeId) {
+
         Optional<UserType> userType= userTypeRepo.findById(userTypeId);
         if(userType.isEmpty()){
             throw new EntryNotFoundException("UserType Not Found");
         }
+
+        Optional<Salary> s= salaryRepo.findByUserTypeIdAndMonth(userTypeId,dto.getMonth());
+        if(s.isPresent()){
+            throw new EntryDuplicateException("Already Added for this month");
+        }
+
 
         List<Employee> employees = employeeRepo.findByUserTypeId(userTypeId);
         for(Employee u : employees){
@@ -68,8 +76,8 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
-    public List<ResponseSalaryDTO> getAll(String searchText) {
-        List<Salary> list = salaryRepo.findBySearchText(searchText);
+    public List<ResponseSalaryDTO> getAll(String month) {
+        List<Salary> list = salaryRepo.findBySearchText(month);
         ArrayList<ResponseSalaryDTO> arrayList = new ArrayList<>();
 
         for(Salary u :list){

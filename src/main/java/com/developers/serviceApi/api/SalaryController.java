@@ -41,14 +41,14 @@ public class SalaryController {
         );
     }
 
-    @GetMapping(path = {"/get-all"},params = {"searchText"})
+    @GetMapping(path = {"/get-all"},params = {"month"})
     public ResponseEntity<StandardResponse> getAll(
-            @RequestParam String searchText
+            @RequestParam String month
     ) throws SQLException {
         LOGGER.info("Request received for get all ");
         return new ResponseEntity<>(
                 new StandardResponse(200, "All Records Fetched",
-                        salaryService.getAll(searchText)),
+                        salaryService.getAll(month)),
                 HttpStatus.OK
         );
     }
