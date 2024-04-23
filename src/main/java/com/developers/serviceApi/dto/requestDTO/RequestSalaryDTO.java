@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestSalaryDTO {
-    private String salaryId;
     private String month;
     private Double amount;
 
