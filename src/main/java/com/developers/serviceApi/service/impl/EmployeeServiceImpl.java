@@ -81,7 +81,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> list;
         ArrayList<ResponseEmployeeDTO> arrayList = new ArrayList<>();
 
-        // Check if branchId or userTypeId is provided
+
         boolean filterByBranch = branchId != null && !branchId.isEmpty();
         boolean filterByUserType = userTypeId != null && !userTypeId.isEmpty();
 
@@ -140,8 +140,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (filterByBranch || filterByUserType) {
             List<Employee> filteredList = new ArrayList<>();
             for (Employee employee : list) {
-                if ((!filterByBranch || employee.getBranch().getBranchName().equals(branchId))
-                        && (!filterByUserType || employee.getUserType().getUserTypeName().equals(userTypeId))) {
+                if ((!filterByBranch || employee.getBranch().getBranchId().equals(branchId))
+                        && (!filterByUserType || employee.getUserType().getUserTypeId().equals(userTypeId))) {
                     filteredList.add(employee);
                 }
             }
