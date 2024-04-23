@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/api/v1/salaries")
+@CrossOrigin
 public class SalaryController {
 
     private final SalaryService salaryService;

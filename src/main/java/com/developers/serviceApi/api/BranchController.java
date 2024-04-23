@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/api/v1/branch")
+@CrossOrigin
 public class BranchController {
     private final Logger LOGGER = LoggerFactory.getLogger(BranchController.class);
     private final BranchService branchService;

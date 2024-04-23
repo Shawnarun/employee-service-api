@@ -63,7 +63,7 @@ public class SalaryServiceImpl implements SalaryService {
             salaryRepo.save(salaryMapper.toSalary(salaryDTO));
         }
 
-        return new CommonResponseDTO(200,"changed",userType,new ArrayList<>());
+        return new CommonResponseDTO(200,"changed",userTypeId,new ArrayList<>());
 
     }
 

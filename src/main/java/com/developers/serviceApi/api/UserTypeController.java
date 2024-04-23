@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 @RestController
 @RequestMapping("/api/v1/user-types")
+@CrossOrigin
 public class UserTypeController {
     private final Logger LOGGER = LoggerFactory.getLogger(UserTypeController.class);
     private final UserTypeService userTypeService;
