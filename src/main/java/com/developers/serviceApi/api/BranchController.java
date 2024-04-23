@@ -1,5 +1,6 @@
 package com.developers.serviceApi.api;
 
+import com.developers.serviceApi.dto.requestDTO.RequestBranchDTO;
 import com.developers.serviceApi.dto.requestDTO.RequestUserTypeDTO;
 import com.developers.serviceApi.dto.responseDTO.CommonResponseDTO;
 import com.developers.serviceApi.service.BranchService;
@@ -26,7 +27,7 @@ public class BranchController {
 
     @PostMapping(path = {"/create"} )
     public ResponseEntity<StandardResponse> create(
-            @Valid @RequestBody RequestUserTypeDTO dto) throws SQLException {
+            @Valid @RequestBody RequestBranchDTO dto) throws SQLException {
         LOGGER.info("Resource creation request received");
         CommonResponseDTO responseData = branchService.create(dto);
         return new ResponseEntity<>(

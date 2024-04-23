@@ -1,6 +1,7 @@
 package com.developers.serviceApi.service.impl;
 
 import com.developers.serviceApi.dto.BranchDTO;
+import com.developers.serviceApi.dto.requestDTO.RequestBranchDTO;
 import com.developers.serviceApi.dto.requestDTO.RequestUserTypeDTO;
 import com.developers.serviceApi.dto.responseDTO.CommonResponseDTO;
 import com.developers.serviceApi.dto.responseDTO.ResponseBranchDTO;
@@ -29,7 +30,7 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
-    public CommonResponseDTO create(RequestUserTypeDTO dto) {
+    public CommonResponseDTO create(RequestBranchDTO dto) {
         //--------------------------------------------------------------------------------------------------------------
         String prefix="SAPI-B-";
         String propertyId = generator.generateNewId(prefix,branchRepo.findLastId(prefix,prefix.length()+1));
@@ -37,7 +38,7 @@ public class BranchServiceImpl implements BranchService {
 
         BranchDTO branchDTO= new BranchDTO(
                 propertyId,
-                dto.getUserTypeName(),
+                dto.getBranchName(),
                 true
         );
         branchRepo.save(branchMapper.toBranch(branchDTO));

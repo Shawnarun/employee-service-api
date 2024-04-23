@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class RequestBranchDTO {
 
     private String branchName;
-    private String activeState;
+
 }
