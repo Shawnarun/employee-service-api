@@ -13,7 +13,7 @@ public interface EmployeeService {
 
 
 
-    List<ResponseEmployeeDTO> getAll(String employeeAvailability, String employmentState);
+    List<ResponseEmployeeDTO> getAll(String employeeAvailability, String employmentState,String branchId,String userTypeId);
 
 
     ResponseEmployeeDTO getById(String employeeId);

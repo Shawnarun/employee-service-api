@@ -77,9 +77,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<ResponseEmployeeDTO> getAll(String employeeAvailability, String employmentState) {
+    public List<ResponseEmployeeDTO> getAll(String employeeAvailability, String employmentState,String branchId,String userTypeId) {
         List<Employee> list;
         ArrayList<ResponseEmployeeDTO> arrayList = new ArrayList<>();
+
+        // Check if branchId or userTypeId is provided
+        boolean filterByBranch = branchId != null && !branchId.isEmpty();
+        boolean filterByUserType = userTypeId != null && !userTypeId.isEmpty();
 
         switch (employeeAvailability){
             case "ALL":
@@ -129,6 +133,19 @@ public class EmployeeServiceImpl implements EmployeeService {
                 break;
             default:
                 throw new RuntimeException("Filter Not Valid");
+        }
+
+        // Apply additional filters if branchId or userTypeId is provided
+
+        if (filterByBranch || filterByUserType) {
+            List<Employee> filteredList = new ArrayList<>();
+            for (Employee employee : list) {
+                if ((!filterByBranch || employee.getBranch().getBranchName().equals(branchId))
+                        && (!filterByUserType || employee.getUserType().getUserTypeName().equals(userTypeId))) {
+                    filteredList.add(employee);
+                }
+            }
+            list = filteredList;
         }
 
         for(Employee u :list){

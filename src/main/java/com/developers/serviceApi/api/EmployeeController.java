@@ -40,16 +40,18 @@ public class EmployeeController {
         );
     }
 
-    @GetMapping(path = {"/get-all"},params = {"employeeAvailability","employmentState"})
+    @GetMapping(path = {"/get-all"},params = {"employeeAvailability","employmentState","branchId","userTypeId"})
     public ResponseEntity<StandardResponse> getAll(
             @RequestParam String employeeAvailability,
-            @RequestParam String employmentState
+            @RequestParam String employmentState,
+            @RequestParam String branchId,
+            @RequestParam String userTypeId
 
     ) throws SQLException {
         LOGGER.info("Request received for get all ");
         return new ResponseEntity<>(
                 new StandardResponse(200, "All Records Fetched",
-                        employeeService.getAll(employeeAvailability,employmentState)),
+                        employeeService.getAll(employeeAvailability,employmentState,branchId,userTypeId)),
                 HttpStatus.OK
         );
     }
