@@ -10,5 +10,5 @@ import java.util.List;
 public interface SalaryService {
     CommonResponseDTO create(RequestSalaryDTO dto, String employeeId);
 
-    List<ResponseSalaryDTO> getAll();
+    List<ResponseSalaryDTO> getAll(String searchText);
 }

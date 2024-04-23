@@ -62,8 +62,8 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
-    public List<ResponseSalaryDTO> getAll() {
-        List<Salary> list = salaryRepo.findAll();
+    public List<ResponseSalaryDTO> getAll(String searchText) {
+        List<Salary> list = salaryRepo.findBySearchText(searchText);
         ArrayList<ResponseSalaryDTO> arrayList = new ArrayList<>();
 
         for(Salary u :list){
