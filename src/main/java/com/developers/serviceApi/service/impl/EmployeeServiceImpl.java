@@ -101,7 +101,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         throw new RuntimeException("Filter Not Valid");
                 }
                 break;
-            case "Enabled":
+            case "ENABLED":
                 switch (employmentState){
                     case "ALL":
                         list = employeeRepo.findEnabled();
@@ -116,7 +116,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                         throw new RuntimeException("Filter Not Valid");
                 }
                 break;
-            case "Disabled":
+            case "DISABLED":
                 switch (employmentState){
                     case "ALL":
                         list = employeeRepo.findDisabled();
