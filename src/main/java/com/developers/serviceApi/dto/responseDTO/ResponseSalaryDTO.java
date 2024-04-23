@@ -10,8 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseSalaryDTO {
     private String salaryId;
+    private String employeeId;
+    private String  employeeName;
     private String month;
     private Double amount;
+    private String userType;
+    private String branchName;
     private boolean paidStatus;
-    private String employeeId; // Assuming EmployeeDTO exists for Employee entity
+
 }

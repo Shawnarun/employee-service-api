@@ -17,15 +17,6 @@ public interface SalaryRepo extends JpaRepository<Salary, String> {
     @Query(value = "SELECT * FROM salary WHERE month like %?1% ", nativeQuery = true)
     List<Salary> findBySearchText(String searchText);
 
-    @Query(value = "SELECT * \n" +
-            "FROM\n" +
-            "salary s\n" +
-            "INNER JOIN user_type ut\n" +
-            "INNER JOIN employee e\n" +
-            "ON \n" +
-            "e.user_type_id = ut.user_type_id\n" +
-            "AND\n" +
-            "e.employee_id=s.employee_id\n" +
-            "WHERE s.month=?2 AND ut.user_type_id=?1 ", nativeQuery = true)
-    Optional<Salary> findByUserTypeIdAndMonth(String userTypeId, String month);
+    @Query(value = "SELECT * FROM salary WHERE employee_id=?1", nativeQuery = true)
+    Optional<Salary> findByEmployeeId(String employeeId);
 }

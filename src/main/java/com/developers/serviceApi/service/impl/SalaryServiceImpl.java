@@ -18,6 +18,7 @@ import com.developers.serviceApi.util.mapper.EmployeeMapper;
 import com.developers.serviceApi.util.mapper.SalaryMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional
     public CommonResponseDTO create(RequestSalaryDTO dto, String userTypeId) {
 
         Optional<UserType> userType= userTypeRepo.findById(userTypeId);
@@ -48,14 +50,14 @@ public class SalaryServiceImpl implements SalaryService {
             throw new EntryNotFoundException("UserType Not Found");
         }
 
-        Optional<Salary> s= salaryRepo.findByUserTypeIdAndMonth(userTypeId,dto.getMonth());
-        if(s.isPresent()){
-            throw new EntryDuplicateException("Already Added for this month");
-        }
-
-
         List<Employee> employees = employeeRepo.findByUserTypeId(userTypeId);
         for(Employee u : employees){
+            Optional<Salary> salary = salaryRepo.findByEmployeeId(u.getEmployeeId());
+            if(salary.isPresent()){
+                if(salary.get().getMonth().equals(dto.getMonth())){
+                    throw new EntryDuplicateException("Already Added For This month");
+                }
+            }
             //--------------------------------------------------------------------------------------------------------------
             String prefix="SAPI-S-";
             String propertyId = generator.generateNewId(prefix,salaryRepo.findLastId(prefix,prefix.length()+1));
@@ -83,10 +85,15 @@ public class SalaryServiceImpl implements SalaryService {
         for(Salary u :list){
             arrayList.add(new ResponseSalaryDTO(
                    u.getSalaryId(),
+                    u.getEmployee().getEmployeeId(),
+                    u.getEmployee().getEmployeeName(),
                     u.getMonth(),
                     u.getAmount(),
-                    u.isPaidStatus(),
-                    u.getEmployee().getEmployeeId()
+                    u.getEmployee().getUserType().getUserTypeName(),
+                    u.getEmployee().getBranch().getBranchName(),
+                    u.isPaidStatus()
+
+
 
 
             ));
