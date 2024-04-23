@@ -54,6 +54,7 @@ public class SalaryServiceImpl implements SalaryService {
 
         List<Employee> employees = employeeRepo.findByUserTypeId(userTypeId);
         for(Employee u : employees){
+            
             List<Salary> salary = salaryRepo.findByEmployeeId(u.getEmployeeId());
              if(!salary.isEmpty()){
                  for (Salary s: salary){
