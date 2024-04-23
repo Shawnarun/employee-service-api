@@ -14,7 +14,9 @@ public class ResponseEmployeeDTO {
     private String employeeAddress;
     private String employeeEmail;
     private String employeeMobile;
-    private Byte employmentState;
-    private Byte activeState;
+    private boolean employmentState;
+    private boolean activeState;
+    private String branchId;
+    private String userTypeId;
 
 }
