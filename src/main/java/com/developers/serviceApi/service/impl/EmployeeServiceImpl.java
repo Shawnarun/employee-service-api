@@ -157,8 +157,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                     u.getEmployeeMobile(),
                     u.isEmploymentState(),
                     u.isActiveState(),
-                    u.getBranch().getBranchId(),
-                    u.getUserType().getUserTypeId()
+                    u.getBranch().getBranchName(),
+                    u.getUserType().getUserTypeName()
             ));
         }
         return arrayList;
@@ -178,8 +178,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 employee.get().getEmployeeMobile(),
                 employee.get().isEmploymentState(),
                 employee.get().isActiveState(),
-                employee.get().getBranch().getBranchId(),
-                employee.get().getUserType().getUserTypeId()
+                employee.get().getBranch().getBranchName(),
+                employee.get().getUserType().getUserTypeName()
         );
     }
 
