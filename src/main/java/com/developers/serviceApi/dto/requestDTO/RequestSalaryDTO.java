@@ -11,6 +11,5 @@ public class RequestSalaryDTO {
     private String salaryId;
     private String month;
     private Double amount;
-    private boolean paidStatus;
-    private String employeeId; // Assuming employee identified by ID in request
+
 }
