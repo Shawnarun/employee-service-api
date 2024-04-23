@@ -18,5 +18,5 @@ public interface SalaryRepo extends JpaRepository<Salary, String> {
     List<Salary> findBySearchText(String searchText);
 
     @Query(value = "SELECT * FROM salary WHERE employee_id=?1", nativeQuery = true)
-    Optional<Salary> findByEmployeeId(String employeeId);
+    List<Salary> findByEmployeeId(String employeeId);
 }

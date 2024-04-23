@@ -32,7 +32,9 @@ public class SalaryServiceImpl implements SalaryService {
     private final EmployeeMapper employeeMapper;
     private final UserTypeRepo userTypeRepo;
 
-    public SalaryServiceImpl(Generator generator, SalaryRepo salaryRepo, SalaryMapper salaryMapper, EmployeeRepo employeeRepo, EmployeeMapper employeeMapper, UserTypeRepo userTypeRepo) {
+    public SalaryServiceImpl(Generator generator, SalaryRepo salaryRepo, SalaryMapper salaryMapper,
+                             EmployeeRepo employeeRepo, EmployeeMapper employeeMapper,
+                             UserTypeRepo userTypeRepo) {
         this.generator = generator;
         this.salaryRepo = salaryRepo;
         this.salaryMapper = salaryMapper;
@@ -52,12 +54,14 @@ public class SalaryServiceImpl implements SalaryService {
 
         List<Employee> employees = employeeRepo.findByUserTypeId(userTypeId);
         for(Employee u : employees){
-            Optional<Salary> salary = salaryRepo.findByEmployeeId(u.getEmployeeId());
-            if(salary.isPresent()){
-                if(salary.get().getMonth().equals(dto.getMonth())){
-                    throw new EntryDuplicateException("Already Added For This month");
-                }
-            }
+            List<Salary> salary = salaryRepo.findByEmployeeId(u.getEmployeeId());
+             if(!salary.isEmpty()){
+                 for (Salary s: salary){
+                     if(s.getMonth().equals(dto.getMonth())){
+                         throw new EntryDuplicateException("Already Added For This Month");
+                     }
+                 }
+             }
             //--------------------------------------------------------------------------------------------------------------
             String prefix="SAPI-S-";
             String propertyId = generator.generateNewId(prefix,salaryRepo.findLastId(prefix,prefix.length()+1));
